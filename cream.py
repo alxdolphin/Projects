@@ -5,7 +5,6 @@
 import os
 import re
 import dotenv as env
-
 import discord
 
 # Set API_KEY from .env file
@@ -30,6 +29,3 @@ async def on_message(message):
         await message.channel.send("Are you talking to me? I'm glad to assist!")
 
 client.run(API_KEY)
-
-
-
