@@ -23,12 +23,16 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    user_message = str(message.content)
+    
     if message.author == client.user:
         return  
-    if message.content.startswith("Cookie") or message.content.startswith("cookie"):
+      
+    if "cookie" in user_message.lower().split(" "):
         if str(message.author) == "alxdolphin":
             await message.channel.send("Are you talking to me, sir? Your wish is my command!")
         else:
             await message.channel.send("Are you talking to me? I'm glad to assist!")
 
 client.run(API_KEY)
+
