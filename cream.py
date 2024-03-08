@@ -5,7 +5,6 @@
 import os
 import re
 import dotenv as env
-
 import discord
 
 # Set API_KEY from .env file
@@ -21,7 +20,6 @@ client = discord.Client(intents=intents)
 @client.event
 async def on_ready():
     print(f'We have logged in as {client.user}')
-    
 
 @client.event
 async def on_message(message):
@@ -29,12 +27,12 @@ async def on_message(message):
     
     if message.author == client.user:
         return  
-    
+      
     if "cookie" in user_message.lower().split(" "):
-        await message.channel.send("Are you talking to me? I'm glad to assist!")
-
+        if str(message.author) == "alxdolphin":
+            await message.channel.send("Are you talking to me, sir? Your wish is my command!")
+        else:
+            await message.channel.send("Are you talking to me? I'm glad to assist!")
 
 client.run(API_KEY)
-
-
 
