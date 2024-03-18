@@ -5,34 +5,38 @@
 import os
 import re
 import dotenv as env
-import discord
-
+import random
+from discord.ext import commands
 # Set API_KEY from .env file
 from dotenv import load_dotenv
 load_dotenv()
 API_KEY = os.getenv("TOKEN")
 
-intents = discord.Intents.default()
-intents.message_content = True
 
-client = discord.Client(intents=intents)
+bot = commands.Bot(commands_prefix = '!')
 
-@client.event
+@bot.event
 async def on_ready():
-    print(f'We have logged in as {client.user}')
+    print(f'We have logged in as {bot.user}')
 
-@client.event
+@bot.event
 async def on_message(message):
-    user_message = str(message.content)
     
-    if message.author == client.user:
+    if message.author == bot.user:
         return  
       
-    if "cookie" in user_message.lower().split(" "):
+    elif "cookie" in message.content.lower():
         if str(message.author) == "alxdolphin":
             await message.channel.send("Are you talking to me, sir? Your wish is my command!")
         else:
             await message.channel.send("Are you talking to me? I'm glad to assist!")
 
-client.run(API_KEY)
+@bot.command(name = 'flip', help = 'Flips a coin for Heads or Tails')
+async def coin_flip(ctx):
+    options = ['Heads!', 'Tails!']
+
+    response = random.choice(options)
+    await ctx.send(response)
+
+bot.run(API_KEY)
 
